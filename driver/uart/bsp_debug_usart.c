@@ -9,9 +9,6 @@
   */ 
   
 #include "bsp_debug_usart.h"
-/* FreeRTOS头文件 */
-#include "FreeRTOS.h"
-#include "semphr.h"
 
 
  /**
@@ -151,25 +148,6 @@ void USARTx_DMA_Config(void)
 	DMA_Cmd (DEBUG_USART_DMA_STREAM, ENABLE);
 }
 
-
-extern SemaphoreHandle_t BinarySem_Handle;
-
-void Uart_DMA_Rx_Data(void)
-{
-	BaseType_t pxHigherPriorityTaskWoken;
-	// 关闭DMA ，防止干扰
-	DMA_Cmd(DEBUG_USART_DMA_STREAM, DISABLE);      
-	// 清DMA标志位
-	DMA_ClearFlag(DEBUG_USART_DMA_STREAM, DMA_FLAG_TCIF2);         
-	//  重新赋值计数值，必须大于等于最大可能接收到的数据帧数目
-	DMA_SetCurrDataCounter(DEBUG_USART_DMA_STREAM, USART_RBUFF_SIZE);     
-	DMA_Cmd(DEBUG_USART_DMA_STREAM, ENABLE);       
-	//给出二值信号量 ，发送接收到新数据标志，供前台程序查询
-	xSemaphoreGiveFromISR(BinarySem_Handle, &pxHigherPriorityTaskWoken);	//释放二值信号量
-	//如果需要的话进行一次任务切换，系统会判断是否需要进行切换
-	portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
-
-}
 
 /*****************  发送一个字符 **********************/
 void Usart_SendByte(USART_TypeDef * pUSARTx, uint8_t ch)

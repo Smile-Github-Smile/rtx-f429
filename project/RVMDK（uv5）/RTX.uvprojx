@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\rtx\inc;..\..\rtx\portable;..\..\driver\led</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\rtx\inc;..\..\rtx\portable;..\..\driver\led;..\..\driver\uart;..\..\driver\key;..\..\driver</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -393,6 +393,11 @@
         <Group>
           <GroupName>cmsis</GroupName>
           <Files>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\stm32f4xx_it.c</FilePath>
+            </File>
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
@@ -665,25 +670,35 @@
               <FilePath>..\..\User\main.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_it.c</FileName>
+              <FileName>bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>RTX_Conf_CM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\RTX_Conf_CM.c</FilePath>
+              <FilePath>..\..\driver\bsp.c</FilePath>
             </File>
             <File>
               <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\driver\led\bsp_led.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\driver\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_debug_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\driver\uart\bsp_debug_usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>rtx/source</GroupName>
           <Files>
+            <File>
+              <FileName>RTX_Conf_CM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\RTX_Conf_CM.c</FilePath>
+            </File>
             <File>
               <FileName>rt_Event.c</FileName>
               <FileType>1</FileType>
