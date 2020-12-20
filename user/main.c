@@ -77,7 +77,9 @@ __task void AppTaskStart(void)
 	
     while(1)
     {
-		os_dly_wait(100);
+		/* 按键扫描 */
+		bsp_KeyScan();
+        os_dly_wait(10);
     }
 }
 
@@ -115,9 +117,65 @@ __task void AppTaskLED(void)
 */
 __task void AppTaskUserIF(void)
 {
+	uint8_t ucKeyCode;
+	
     while(1)
     {
-		os_dly_wait(100);
+		ucKeyCode = bsp_GetKey();
+		
+		if (ucKeyCode != KEY_NONE)
+		{
+			switch (ucKeyCode)
+			{
+				/* KEY_UP键按下，打印调试说明 */
+				case KEY_UP_DOWN:	
+					printf("KEY_UP键按下，RTX测试\r\n");
+					break;
+				
+				/* KEY_DOWN键按下，删除任务AppTaskLED */
+				case KEY_DOWN_DOWN:	
+					printf("KEY_DOWN键按下，删除任务HandleTaskLED\r\n");
+				
+					if(HandleTaskLED != NULL)
+					{
+						if(os_tsk_delete(HandleTaskLED) == OS_R_OK)
+						{
+							HandleTaskLED = NULL;
+							printf("任务AppTaskLED删除成功\r\n");
+						}
+						else
+						{
+							printf("任务AppTaskLED删除失败\r\n");					
+						}
+					}
+					break;	
+
+				/* KEY_LEFT键按下，打印调试说明 */
+				case KEY_LEFT_DOWN:	
+					printf("KEY_LEFT键按下，RTX测试\r\n");
+					break;					
+				
+				/* KEY_RIGHT键按下，重新创建任务AppTaskLED */
+				case KEY_RIGHT_DOWN:	
+					printf("KEY_LEFT键按下，重新创建任务AppTaskLED\r\n");
+				
+					if(HandleTaskLED == NULL)
+					{
+						HandleTaskLED = os_tsk_create_user(AppTaskLED,              /* 任务函数 */ 
+														   1,                       /* 任务优先级 */ 
+														   &AppTaskLEDStk,          /* 任务栈 */
+														   sizeof(AppTaskLEDStk));  /* 任务栈大小，单位字节数 */
+					}
+					break;
+					
+				/* 其他的键值不处理 */
+				default:                     
+					break;
+			}
+		}
+		
+		os_dly_wait(20);
+		
     }
 }
 
@@ -136,9 +194,9 @@ __task void AppTaskMsgPro(void)
     while(1)
     {
 		LED2( ON );			 // 亮 
-        os_dly_wait(100);
+        os_dly_wait(500);
 		LED2( OFF );		 // 灭
-		os_dly_wait(100);
+		os_dly_wait(500);
     }
 }
 

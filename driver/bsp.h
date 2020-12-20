@@ -35,6 +35,7 @@
 
 #include "bsp_led.h"
 #include "bsp_key.h"
+#include "bsp_debug_usart.h"
 
 
 /* 提供给其他C文件调用的函数 */

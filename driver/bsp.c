@@ -9,6 +9,7 @@
   */
 #include "bsp.h"
 
+
 /*
 *********************************************************************************************************
 *	º¯ Êý Ãû: bsp_Init
@@ -24,8 +25,8 @@ void bsp_Init(void)
 	SystemCoreClockUpdate();
 
 	LED_GPIO_Config();
-	
-	Key_GPIO_Config();
+		
+	bsp_InitKey();
 	
 	Debug_USART_Config();
 	
