@@ -406,7 +406,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>driver</GroupName>
+          <GroupName>library</GroupName>
           <Files>
             <File>
               <FileName>misc.c</FileName>
@@ -662,22 +662,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>user</GroupName>
+          <GroupName>driver</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>bsp_debug_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\driver\bsp.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\driver\led\bsp_led.c</FilePath>
+              <FilePath>..\..\driver\uart\bsp_debug_usart.c</FilePath>
             </File>
             <File>
               <FileName>bsp_key.c</FileName>
@@ -685,9 +675,24 @@
               <FilePath>..\..\driver\key\bsp_key.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_debug_usart.c</FileName>
+              <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\driver\uart\bsp_debug_usart.c</FilePath>
+              <FilePath>..\..\driver\led\bsp_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\driver\bsp.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>user</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\main.c</FilePath>
             </File>
           </Files>
         </Group>
